@@ -6,6 +6,7 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\URL;
 use Laravel\Passport\Passport;
 use App\Models\Passport\Client;
+use Illuminate\Support\Facades\Event;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -22,6 +23,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        Event::listen(function (\SocialiteProviders\Manager\SocialiteWasCalled $event) {
+            $event->extendSocialite('weixin', \SocialiteProviders\Weixin\Provider::class);
+        });
         if ($this->app->environment() !== 'local') {
             URL::forceScheme('https');
         }

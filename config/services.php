@@ -34,5 +34,9 @@ return [
             'channel' => env('SLACK_BOT_USER_DEFAULT_CHANNEL'),
         ],
     ],
-
+    'weixin' => [
+        'client_id' => env('WEIXIN_CLIENT_ID'),  
+        'client_secret' => env('WEIXIN_CLIENT_SECRET'),  
+        'redirect' => env('WEIXIN_REDIRECT_URI'),
+    ],
 ];
