@@ -20,7 +20,3 @@ Route::middleware([
 
 Route::get('/login/wechat', [WeixinController::class, 'weixin'])->name('login');
 Route::get('/login/wechat/callback', [WeixinController::class, 'weixinlogin']);
-
-Route::get('/api/user', function (Request $request) {
-    return $request->user();
-})->middleware('auth:api');
