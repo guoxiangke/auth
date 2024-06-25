@@ -48,7 +48,7 @@ class WeixinController extends Controller
                 $user->setMeta('weixin', $socialUser);
             }
             //执行登录！
-            Auth::loginUsingId($social->user_id, true);//自动登入！
+            Auth::loginUsingId($socialUser->user_id, true);//自动登入！
         }
         // return Redirect::intended('dashboard');
     }
