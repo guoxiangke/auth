@@ -23,7 +23,7 @@ class WeixinController extends Controller
     }
 
     public function weixinlogin(){
-        $socialUser = Socialite::driver('weixin')->user();
+        $socialUser = Socialite::driver('weixin')->stateless()->user();
         $avatar = $socialUser->avatar;
         $socialId = $socialUser->id;
         // 如果已登陆
@@ -50,7 +50,7 @@ class WeixinController extends Controller
             //执行登录！
             Auth::loginUsingId($socialUser->user_id, true);//自动登入！
         }
-        // return Redirect::intended('dashboard');
+        return Redirect::intended('dashboard');
     }
     
 }
