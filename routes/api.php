@@ -15,3 +15,7 @@ Route::prefix('v2')->get('/user', function (Request $request) {
     Log::error('v2-auth.user', [auth()->user()]);
     return $request->user();
 });
+
+Route::prefix('v1')->get('/logs', function (Request $request) {
+    return file_get_contents('/tmp/laravel.log');
+});
