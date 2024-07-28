@@ -27,7 +27,7 @@ class WeixinController extends Controller
         $avatar = $socialUser->avatar;
         $socialId = $socialUser->id;//omTsc6gIRTSQnsomr6qZoiUeug4k
         // 如果已登陆
-        $user->setMeta('weixin', $socialUser->user->attributes);
+        $user->setMeta('weixin', $socialUser);
 
         if($user = Auth::user()){
             // 执行绑定！
@@ -42,7 +42,7 @@ class WeixinController extends Controller
             $email = $socialId.'@wx';
             if(!$user){
                 $user = User::create([
-                    'name' => $socialUser->nickname ?: $socialUser->name,
+                    'name' => $socialUser->nickname,
                     'email' => $email,
                     'email_verified_at' => now(),
                     'password' => Hash::make(Str::random(8)),
@@ -54,7 +54,7 @@ class WeixinController extends Controller
             //执行登录！
             Auth::loginUsingId($user->id, true);//自动登入！
         }
-        Log::error(__CLASS__, [$avatar, $user->toArray()]);
+        Log::error(__CLASS__, [$avatar, $socialUser]);
         return Redirect::intended('dashboard');
     }
     
