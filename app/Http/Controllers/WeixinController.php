@@ -24,14 +24,18 @@ class WeixinController extends Controller
 
     public function weixinlogin(){
         $socialUser = Socialite::driver('weixin')->stateless()->user();
-        Log::error(__CLASS__,[$socialUser]);
         $avatar = $socialUser->avatar;
-        $socialId = $socialUser->id;
+        $socialId = $socialUser->id;//omTsc6gIRTSQnsomr6qZoiUeug4k
         // 如果已登陆
+        $user->setMeta('weixin', $socialUser->user->attributes);
+
         if($user = Auth::user()){
             // 执行绑定！
             $user->setMeta('wxid', $socialId);
-            $user->setMeta('weixin', $socialUser);
+            $user->update([
+                'name' => $socialUser->nickname,
+                'profile_photo_path' => $avatar,
+            ]);
         }else{
             // 未登录，执行登录！
             $user = User::whereHasMeta('wxid', $socialId)->first();
@@ -46,11 +50,11 @@ class WeixinController extends Controller
                     'profile_photo_path' => $avatar,
                 ]);
                 $user->setMeta('wxid', $socialId);
-                $user->setMeta('weixin', $socialUser);
             }
             //执行登录！
             Auth::loginUsingId($user->id, true);//自动登入！
         }
+        Log::error(__CLASS__, [$avatar, $user->toArray()]);
         return Redirect::intended('dashboard');
     }
     
