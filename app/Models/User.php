@@ -15,7 +15,7 @@ use Plank\Metable\Metable;
 class User extends Authenticatable
 {
     use Metable;
-    protected $with = ['meta'];
+    // protected $with = ['meta'];
     use HasApiTokens;
     use HasFactory;
     use HasProfilePhoto;
@@ -31,6 +31,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'profile_photo_path',
     ];
 
     /**
