@@ -24,7 +24,7 @@ class WeixinController extends Controller
 
     public function weixinlogin(){
         $socialUser = Socialite::driver('weixin')->stateless()->user();
-        Log::error(__CLASS__,[$socialUser->toArray()]);
+        Log::error(__CLASS__,[$socialUser]);
         $avatar = $socialUser->avatar;
         $socialId = $socialUser->id;
         // 如果已登陆
