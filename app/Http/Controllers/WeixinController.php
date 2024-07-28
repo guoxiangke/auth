@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
 
-// use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Log;
 // use Illuminate\Support\Facades\Cache;
 // use Cookie;
 
@@ -24,6 +24,7 @@ class WeixinController extends Controller
 
     public function weixinlogin(){
         $socialUser = Socialite::driver('weixin')->stateless()->user();
+        Log::error(__CLASS__,[$socialUser->toArray()]);
         $avatar = $socialUser->avatar;
         $socialId = $socialUser->id;
         // 如果已登陆
