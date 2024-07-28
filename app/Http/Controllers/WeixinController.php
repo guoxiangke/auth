@@ -27,11 +27,8 @@ class WeixinController extends Controller
         $avatar = $socialUser->avatar;
         $socialId = $socialUser->id;//omTsc6gIRTSQnsomr6qZoiUeug4k
         // 如果已登陆
-        $user->setMeta('weixin', $socialUser);
-
         if($user = Auth::user()){
             // 执行绑定！
-            $user->setMeta('wxid', $socialId);
             $user->update([
                 'name' => $socialUser->nickname,
                 'profile_photo_path' => $avatar,
@@ -49,11 +46,12 @@ class WeixinController extends Controller
                     'remember_token' => Str::random(10),
                     'profile_photo_path' => $avatar,
                 ]);
-                $user->setMeta('wxid', $socialId);
             }
             //执行登录！
             Auth::loginUsingId($user->id, true);//自动登入！
         }
+        $user->setMeta('wxid', $socialId);
+        $user->setMeta('weixin', $socialUser->user->attributes);
         Log::error(__CLASS__, [$avatar, $socialUser]);
         return Redirect::intended('dashboard');
     }
