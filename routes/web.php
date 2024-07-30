@@ -22,5 +22,7 @@ Route::middleware([
     })->name('dashboard');
 });
 
-Route::get('/login/wechat', [WeixinController::class, 'weixin'])->name('login');
-Route::get('/login/wechat/callback', [WeixinController::class, 'weixinlogin']);
+Route::middleware('guest')->group(function () {
+    Route::get('/login/wechat', [WeixinController::class, 'weixin'])->name('login');
+    Route::get('/login/wechat/callback', [WeixinController::class, 'weixinlogin']);
+});
