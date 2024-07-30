@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>授权登陆222</title>
+  <title>授权登陆</title>
   @vite(['resources/css/app.css', 'resources/js/app.js'])
   <style>
     .btn {
@@ -32,17 +32,5 @@
       </div>
     </div>
   </div>
-  
-        <script src="https://sf-cdn.coze.com/obj/unpkg-va/flow-platform/chat-app-sdk/0.1.0-beta.4/libs/oversea/index.js"></script>
-      <script>
-          new CozeWebSDK.WebChatClient({
-            config: {
-              bot_id: '7383417904928276485',
-            },
-            componentProps: {
-              title: 'Coze',
-            },
-          });
-      </script>
 </body>
 </html>

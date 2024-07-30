@@ -8,13 +8,17 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/auth', function () {
+    return view('home');
+})->name('wx.auth');
+
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
     Route::get('/dashboard', function () {
-        return view('home');
+        return view('dashboard');
     })->name('dashboard');
 });
 
